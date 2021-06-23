@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huage.easycode.mapper.UserMapper">
+
+    <resultMap type="com.huage.easycode.model.entity.User" id="UserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--表字段-->
+    <sql id="column">id,name,age,address</sql>
+
+    <!--根据ID查询单条数据-->
+    <select id="selectById" resultMap="UserMap">
+        select
+        <include refid="column"></include>
+        from user
+        where id = #{id}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectList" resultMap="UserMap">
+        select
+        <include refid="column"></include>
+        from user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into huage.user(name, age, address)
+        values (#{name}, #{age}, #{address})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update huage.user
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from huage.user where id = #{id}
+    </delete>
+
+</mapper>
