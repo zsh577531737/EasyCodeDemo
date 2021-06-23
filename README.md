@@ -8,3 +8,6 @@
 
 * 如遇模板失效，添加公众号【Java开发零到壹】回复【EasyCode】获取
 
+![qrcode_for_gh_6c44fed6833c_258.jpg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc92df65422d44ba98d25bebb991ffd7~tplv-k3u1fbpfcp-watermark.image)
+
+【扫码添加公众号】
